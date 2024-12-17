@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini Whatsapp</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <h1>All Chats!</h1>
+    <form method="get" action="/chats/new">
+      <button>New Chat</button>
+    </form>
+    <br> <br>
+    <%for(let chat of chats){%>
+    <div class="chat">
+      <p>From: <i><%= chat.from%></i></p>
+      <div class="message">
+        <%= chat.message%>
+        <div class="edit-delete">
+            <form method="get" action="/chats/<%=chat._id%>/edit">
+                <button class="btn btn-warning">edit</button>
+              </form>
+              <form method="post" action="/chats/<%=chat._id%>?_method=DELETE">
+                <button class="btn btn-danger">DELETE</button>
+              </form>
+        </div>
+      </div>
+      <p>Received by: <i><%= chat.to%> </i></p>
+      <hr />
+      <p><%= chat.createdAt.toString().split(" ")[4]%></p>
+      <p><%= chat.createdAt.toString().split(" ").slice(0, 4).join("-")%></p>
+    </div>
+    <br />
+    <br />
+    <br />
+    <%}%>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
